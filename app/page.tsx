@@ -8,7 +8,7 @@ const frameMetadata = getFrameMetadata({
 			label: "My Warpcast profile",
 		},
 	],
-	image: `${NEXT_PUBLIC_URL}/init.jpg`,
+	image: `${NEXT_PUBLIC_URL}/init.jpeg`,
 	post_url: `${NEXT_PUBLIC_URL}/api/generator`,
 });
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "Onframe QR Code Generator",
 		description: "Onframe QR Code Generator",
-		images: [`${NEXT_PUBLIC_URL}/init.jpg`],
+		images: [`${NEXT_PUBLIC_URL}/init.jpeg`],
 	},
 	other: {
 		...frameMetadata,
