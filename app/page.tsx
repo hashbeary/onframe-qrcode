@@ -5,7 +5,10 @@ import { NEXT_PUBLIC_URL } from "./config";
 const frameMetadata = getFrameMetadata({
 	buttons: [
 		{
-			label: "My Warpcast profile",
+			label: "Light",
+		},
+		{
+			label: "Dark",
 		},
 	],
 	image: `${NEXT_PUBLIC_URL}/init.jpeg`,

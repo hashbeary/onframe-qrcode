@@ -1,32 +1,36 @@
-import { generateSVG } from "@/app/lib/generateSVG";
 import {
 	FrameRequest,
 	getFrameHtmlResponse,
 	getFrameMessage,
 } from "@coinbase/onchainkit";
 import { NextRequest, NextResponse } from "next/server";
+import QRCode from "qrcode";
 import { NEXT_PUBLIC_URL } from "../../config";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
 	const body: FrameRequest = await req.json();
 
-	const { isValid, message } = await getFrameMessage(body, {
+	const { message } = await getFrameMessage(body, {
 		neynarApiKey: "NEYNAR_ONCHAIN_KIT",
 	});
 
-	if (!isValid) {
-		return new NextResponse(
-			getFrameHtmlResponse({
-				buttons: [
-					{
-						label: "Something went wrong. But you may retry!",
-					},
-				],
-				image: `${NEXT_PUBLIC_URL}/error.jpg`,
-				post_url: `${NEXT_PUBLIC_URL}/api/images?slide=`,
-			})
-		);
-	}
+	const lightmode = message?.button == 1 ? true : false;
+
+	const QRCodeBuffer = await QRCode.toBuffer(
+		"https://warpcast.com/" + message?.raw.action.cast.author.username,
+		{
+			width: 500,
+			color: lightmode
+				? {
+						dark: "#16101E",
+						light: "#FFFFFF",
+				  }
+				: {
+						dark: "#FFFFFF",
+						light: "#16101E",
+				  },
+		}
+	);
 
 	return new NextResponse(
 		getFrameHtmlResponse({
@@ -34,12 +38,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 				{
 					label: "⬅️",
 				},
-				{
-					label: "➡️",
-				},
 			],
-			image: await generateSVG(),
-			post_url: `${NEXT_PUBLIC_URL}/api/images?slide=`,
+			image: QRCodeBuffer.toString("base64"),
+			post_url: `${NEXT_PUBLIC_URL}`,
 		})
 	);
 }
