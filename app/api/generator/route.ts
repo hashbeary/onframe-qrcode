@@ -39,7 +39,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					label: "⬅️",
 				},
 			],
-			image: QRCodeBuffer.toString("base64"),
+			image: `data:image/png;base64,${QRCodeBuffer.toString("base64")}`,
 			post_url: `${NEXT_PUBLIC_URL}`,
 		})
 	);
