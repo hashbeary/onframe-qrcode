@@ -23,12 +23,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 		width: 250,
 		color: darkMode
 			? {
-					dark: "#16101E",
-					light: "#FFFFFF",
-			  }
-			: {
 					dark: "#FFFFFF",
 					light: "#16101E",
+			  }
+			: {
+					dark: "#16101E",
+					light: "#FFFFFF",
 			  },
 	});
 
