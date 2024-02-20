@@ -5,15 +5,18 @@ import { NEXT_PUBLIC_URL } from "./config";
 const frameMetadata = getFrameMetadata({
 	buttons: [
 		{
-			label: "Light",
+			label: "🌞",
 		},
 		{
-			label: "Dark",
+			label: "🌚",
 		},
 	],
 	image: {
 		src: `${NEXT_PUBLIC_URL}/init.jpeg`,
 		aspectRatio: "1:1",
+	},
+	input: {
+		text: "Third party link...",
 	},
 	post_url: `${NEXT_PUBLIC_URL}/api/generator`,
 });

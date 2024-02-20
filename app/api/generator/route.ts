@@ -14,14 +14,23 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 		neynarApiKey: "NEYNAR_ONCHAIN_KIT",
 	});
 
-	const lightmode = message?.button == 1 ? true : false;
+	const darkMode = message?.button == 2 ? true : false;
+	const customLink = message?.input;
+	const link = customLink
+		? customLink
+		: "https://warpcast.com/" + message?.raw.action.interactor.username;
 
-	const QRCodeBuffer = await QRCode.toBuffer("https://warpcast.com", {
-		width: 500,
-		color: {
-			dark: "#16101E",
-			light: "#FFFFFF",
-		},
+	const QRCodeBuffer = await QRCode.toBuffer(link, {
+		width: 250,
+		color: darkMode
+			? {
+					dark: "#16101E",
+					light: "#FFFFFF",
+			  }
+			: {
+					dark: "#FFFFFF",
+					light: "#16101E",
+			  },
 	});
 
 	const QRCodeBase64 = QRCodeBuffer.toString("base64");
