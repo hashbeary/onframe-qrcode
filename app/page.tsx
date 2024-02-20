@@ -12,7 +12,7 @@ const frameMetadata = getFrameMetadata({
 		},
 	],
 	image: {
-		src: `${NEXT_PUBLIC_URL}/init.jpeg`,
+		src: `${NEXT_PUBLIC_URL}/init.jpg`,
 		aspectRatio: "1:1",
 	},
 	input: {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "Onframe QR Code Generator",
 		description: "Onframe QR Code Generator",
-		images: [`${NEXT_PUBLIC_URL}/init.jpeg`],
+		images: [`${NEXT_PUBLIC_URL}/init.jpg`],
 	},
 	other: {
 		...frameMetadata,
