@@ -11,7 +11,10 @@ const frameMetadata = getFrameMetadata({
 			label: "Dark",
 		},
 	],
-	image: `${NEXT_PUBLIC_URL}/init.jpeg`,
+	image: {
+		src: `${NEXT_PUBLIC_URL}/init.jpeg`,
+		aspectRatio: "1:1",
+	},
 	post_url: `${NEXT_PUBLIC_URL}/api/generator`,
 });
 

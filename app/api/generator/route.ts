@@ -16,21 +16,15 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	const lightmode = message?.button == 1 ? true : false;
 
-	const QRCodeBuffer = await QRCode.toBuffer(
-		"https://warpcast.com/" + message?.raw.action.cast.author.username,
-		{
-			width: 500,
-			color: lightmode
-				? {
-						dark: "#16101E",
-						light: "#FFFFFF",
-				  }
-				: {
-						dark: "#FFFFFF",
-						light: "#16101E",
-				  },
-		}
-	);
+	const QRCodeBuffer = await QRCode.toBuffer("https://warpcast.com", {
+		width: 500,
+		color: {
+			dark: "#16101E",
+			light: "#FFFFFF",
+		},
+	});
+
+	const QRCodeBase64 = QRCodeBuffer.toString("base64");
 
 	return new NextResponse(
 		getFrameHtmlResponse({
@@ -39,7 +33,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 					label: "⬅️",
 				},
 			],
-			image: `data:image/png;base64,${QRCodeBuffer.toString("base64")}`,
+			image: {
+				src: "data:image/png;base64," + QRCodeBase64,
+				aspectRatio: "1:1",
+			},
 			post_url: `${NEXT_PUBLIC_URL}`,
 		})
 	);
