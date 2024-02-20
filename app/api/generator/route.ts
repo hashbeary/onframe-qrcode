@@ -5,7 +5,6 @@ import {
 } from "@coinbase/onchainkit";
 import { NextRequest, NextResponse } from "next/server";
 import QRCode from "qrcode";
-import { NEXT_PUBLIC_URL } from "../../config";
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
 	const body: FrameRequest = await req.json();
@@ -37,16 +36,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	return new NextResponse(
 		getFrameHtmlResponse({
-			buttons: [
-				{
-					label: "⬅️",
-				},
-			],
 			image: {
 				src: "data:image/png;base64," + QRCodeBase64,
 				aspectRatio: "1:1",
 			},
-			post_url: `${NEXT_PUBLIC_URL}`,
 		})
 	);
 }

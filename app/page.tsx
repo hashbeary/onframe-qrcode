@@ -16,7 +16,7 @@ const frameMetadata = getFrameMetadata({
 		aspectRatio: "1:1",
 	},
 	input: {
-		text: "Third party link...",
+		text: "Optional third party link...",
 	},
 	post_url: `${NEXT_PUBLIC_URL}/api/generator`,
 });
