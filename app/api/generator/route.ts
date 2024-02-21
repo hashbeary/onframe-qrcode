@@ -1,3 +1,4 @@
+import { NEXT_PUBLIC_URL } from "@/app/config";
 import {
 	FrameRequest,
 	getFrameHtmlResponse,
@@ -36,10 +37,16 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	return new NextResponse(
 		getFrameHtmlResponse({
+			buttons: [
+				{
+					label: "⬅️",
+				},
+			],
 			image: {
 				src: "data:image/png;base64," + QRCodeBase64,
 				aspectRatio: "1:1",
 			},
+			post_url: `${NEXT_PUBLIC_URL}/api/redirect`,
 		})
 	);
 }
